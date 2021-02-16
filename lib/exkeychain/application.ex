@@ -12,9 +12,14 @@ defmodule Exkeychain.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Exkeychain.PubSub},
       # Start the Endpoint (http/https)
-      ExkeychainWeb.Endpoint
+      ExkeychainWeb.Endpoint,
       # Start a worker by calling: Exkeychain.Worker.start_link(arg)
       # {Exkeychain.Worker, arg}
+      # ctomasin: starting kc_app as server only
+      %{
+        id: :kc_sup,
+        start: {:kc_sup, :start_link, [[:server]]}
+      }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

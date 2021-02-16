@@ -20,9 +20,11 @@ defmodule ExkeychainWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ExkeychainWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", ExkeychainWeb do
+    pipe_through :api
+
+    resources "/accounts", AccountController, except: [:edit]
+  end
 
   # Enables LiveDashboard only for development
   #

@@ -41,7 +41,10 @@ defmodule Exkeychain.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      # ctomasin: runtime false: install dependency, but do not start the application
+      # (kc_app need a parameter to start)
+      {:kc, git: "git@github.com:ctxhaard/erlkeychain", branch: "master", runtime: false}
     ]
   end
 
