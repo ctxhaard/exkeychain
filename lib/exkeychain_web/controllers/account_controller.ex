@@ -26,10 +26,9 @@ defmodule ExkeychainWeb.AccountController do
     render(conn, :index, accounts: accounts )
 end
 
-  def show(conn, %{ "file" => file, "pwd" => pwd, "id" => id }) do
-    with :ok <- :kc_server.load(file, pwd),
-      {:account, a} <- :kc_server.get(String.to_integer(id)),
-      do: render(conn, "show.json", account: a)
+  def show(conn, %{ "id" => id }) do
+    {:account, a} = :kc_server.get(String.to_integer(id))
+    render(conn, :show, account: a)
   end
 
   def new(conn, _params) do
