@@ -16,7 +16,11 @@ defmodule ExkeychainWeb.Router do
   scope "/", ExkeychainWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    #get "/", PageController, :index
+    get "/accounts/load", AccountController, :form
+    post "/accounts/load", AccountController, :load
+    resources "/accounts", AccountController, except: [:edit]
+    get "/", AccountController, :entrypoint
   end
 
   # Other scopes may use custom stacks.

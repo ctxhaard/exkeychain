@@ -3,11 +3,28 @@ defmodule ExkeychainWeb.AccountController do
 
   require Logger
 
-  def index(conn, %{ "file" => file, "pwd" => pwd }) do
-    with :ok <- :kc_server.load( file,pwd),
-      accounts = get_accounts([]),
-      do: render(conn, "index.json", accounts: accounts )
+  def entrypoint(conn, _params) do
+    if :kc_server.is_loaded() do
+      redirect(conn, to: "/accounts/")
+    else
+      redirect(conn, to: Routes.account_path(conn, :load) )
+    end
+
   end
+
+  def form(conn, _params) do
+    render(conn, "load.html")
+  end
+
+  def load(conn, %{ "file" => file, "pwd" => pwd }) do
+    with :ok <- :kc_server.load( file,pwd),
+      do: redirect(conn, to: Routes.account_path(conn, :index) )
+  end
+
+  def index(conn, _params) do
+    accounts = get_accounts([])
+    render(conn, :index, accounts: accounts )
+end
 
   def show(conn, %{ "file" => file, "pwd" => pwd, "id" => id }) do
     with :ok <- :kc_server.load(file, pwd),

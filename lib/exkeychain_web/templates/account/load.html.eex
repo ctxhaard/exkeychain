@@ -1,0 +1,16 @@
+<%= form_tag(Routes.account_path(@conn, :load), method: :post) %>
+<!--<form action="<%= Routes.account_path(@conn, :load)  %>" method="post">-->
+    <ul>
+        <li>
+            <label for="file_path">File Path:</label>
+            <input type="text" id="file_path" name="file" required value="archive.protected">
+        </li>
+        <li>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="pwd" required>
+        </li>
+        <li class="button">
+            <button type="submit">Load</button>
+        </li>
+    </ul>
+</form>
