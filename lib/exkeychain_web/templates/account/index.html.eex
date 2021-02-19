@@ -1,11 +1,12 @@
 <ul id="accounts"></ul>
 <script>
-    function render_account(account) {
+    function show_account_item(account) {
         var node = document.createElement("li");
-        node.innerHTML = `<strong>${account.id}</strong>: ${account.title}`;
+        node.innerHTML = `<a><strong>${account.id}</strong>: ${account.title}</a>`;
+        node.querySelector("a").setAttribute("href", `<%= Routes.account_path(@conn, :index) %>/${account.id}`);
         document.querySelector('#accounts').appendChild(node);
     }
     fetch("/api/accounts", { method: 'GET' })
         .then(response => response.json())
-        .then(json => json.data.forEach(e => render_account(e)));
-</script
+        .then(json => json.data.forEach(e => show_account_item(e)));
+</script>

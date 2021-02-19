@@ -1,2 +1,19 @@
 /* This file is for your main application css. */
 @import "./phoenix.css";
+
+.account-label {
+    display: block;
+    width: 30%;
+}
+
+input[type='text'] {
+    display: block;
+    width: 60%;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    border-radius: unset;
+}
+
+button {
+    margin: 5px;
+}
