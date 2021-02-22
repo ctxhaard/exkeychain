@@ -1,6 +1,8 @@
 defmodule ExkeychainWeb.UserSocket do
   use Phoenix.Socket
 
+  require Logger
+
   ## Channels
   # channel "room:*", ExkeychainWeb.RoomChannel
 
@@ -16,7 +18,8 @@ defmodule ExkeychainWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   @impl true
-  def connect(_params, socket, _connect_info) do
+  def connect(params, socket, connect_info) do
+    Logger.debug("params: #{ params }, socket: #{ socket }, connect_info: #{ connect_info }")
     {:ok, socket}
   end
 
