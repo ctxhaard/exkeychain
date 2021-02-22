@@ -19,7 +19,7 @@ defmodule ExkeychainWeb.UserSocket do
   # performing token verification on connect.
   @impl true
   def connect(params, socket, connect_info) do
-    Logger.debug("params: #{ params }, socket: #{ socket }, connect_info: #{ connect_info }")
+    Logger.debug("params: #{ inspect( params) }, socket: #{ inspect(socket) }, connect_info: #{ inspect(connect_info) }")
     {:ok, socket}
   end
 

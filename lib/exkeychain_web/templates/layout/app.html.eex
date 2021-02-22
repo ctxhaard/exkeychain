@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Exkeychain · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/phoenix.dev.js" ) %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/phoenix.dev.js" ) %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/test.js") %>"></script>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script>
-      //import { Socket } from 'phoenix';
-      let socket = new Socket("/socket", { params: { userToken: "123" }});
-      socket.connect();
-    </script>
   </head>
   <body>
     <header>
