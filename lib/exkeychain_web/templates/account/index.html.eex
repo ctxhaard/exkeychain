@@ -1,12 +1,24 @@
-<ul id="accounts"></ul>
+<ul id="accounts">
+    <li v-for="item in items" ><a><strong>{{ item.id }}</strong>: {{ item.title }}</a></li>
+</ul>
 <script>
-    function show_account_item(account) {
-        var node = document.createElement("li");
-        node.innerHTML = `<a><strong>${account.id}</strong>: ${account.title}</a>`;
-        node.querySelector("a").setAttribute("href", `<%= Routes.account_path(@conn, :index) %>/${account.id}`);
-        document.querySelector('#accounts').appendChild(node);
-    }
-    fetch("/api/accounts", { method: 'GET' })
-        .then(response => response.json())
-        .then(json => json.data.forEach(e => show_account_item(e)));
+    new Vue(
+        {
+            el: "#accounts",
+            data: {
+                items: [
+                    {
+                        "id": "test id",
+                        "title": "test title"
+                    }
+                ]
+            },
+            created: function () {
+                self = this;
+                fetch("/api/accounts", { method: 'GET' })
+                    .then(response => response.json())
+                    .then( json => self.items = json.data );
+            }
+        }
+    );
 </script>
