@@ -1,6 +1,10 @@
 defmodule ExkeychainWeb.AccountView do
   use ExkeychainWeb, :view
 
+  def render("authentication.json", _) do
+    %{ status: "ok" }
+  end
+
   def render("index.json", %{accounts: accounts}) do
     %{ data: render_many(accounts, ExkeychainWeb.AccountView, "account.json")}
   end
