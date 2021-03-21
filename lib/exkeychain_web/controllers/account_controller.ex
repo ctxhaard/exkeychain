@@ -51,9 +51,10 @@ defmodule ExkeychainWeb.AccountController do
     render(conn, :update, account: a)
   end
   
-  def delete(conn, %{ "file" => file, "pwd" => pwd, "id" => id }) do
+  def delete(conn, %{ "id" => id }) do
     Logger.info("#{ __MODULE__ }#{  elem(__ENV__.function,0) }")
-    conn
+    :kc_server.delete(id)
+    render(conn, :delete, id: id)
   end
   
   @type account :: [%{}]

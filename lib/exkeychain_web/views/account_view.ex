@@ -17,6 +17,10 @@ defmodule ExkeychainWeb.AccountView do
     %{ id: map.id }
   end
 
+  def render("delete.json", %{ id: id}) do
+    %{ id: id}
+  end
+
   def render("account.json", %{ account: account }) do
     account
   end
