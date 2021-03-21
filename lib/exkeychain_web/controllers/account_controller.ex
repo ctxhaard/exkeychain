@@ -43,9 +43,12 @@ defmodule ExkeychainWeb.AccountController do
     conn
   end
   
-  def update(conn, _param) do
+  def update(conn, params) do
     Logger.info("#{ __MODULE__ }#{  elem(__ENV__.function,0) }")
-    conn
+    convertedParams = for { key, val} <- params, into: %{}, do: {String.to_atom(key), val}
+    a = {:account, convertedParams}
+    :kc_server.put(a)
+    render(conn, :update, account: a)
   end
   
   def delete(conn, %{ "file" => file, "pwd" => pwd, "id" => id }) do
