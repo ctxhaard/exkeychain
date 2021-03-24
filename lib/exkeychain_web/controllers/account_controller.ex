@@ -29,17 +29,20 @@ defmodule ExkeychainWeb.AccountController do
   end
   
   def show(conn, %{ "id" => id }) do
-    {:account, a} = :kc_server.get(String.to_integer(id))
+    {:account, a} = id |> String.to_integer() |> :kc_server.get()
     render(conn, :show, account: a)
   end
   
   def new(conn, _params) do
-    Logger.info("#{ __MODULE__ }#{  elem(__ENV__.function,0) }")
+    # used to get a new, unsaved, account to edit and then
+    # submit to creare
+    Logger.info("TODO: implement #{ __MODULE__ }#{  elem(__ENV__.function,0) }")
     conn
   end
   
   def create(conn, _param) do
-    Logger.info("#{ __MODULE__ }#{  elem(__ENV__.function,0) }")
+    # used to submit a newly created account
+    Logger.info("TODO: implement #{ __MODULE__ }#{  elem(__ENV__.function,0) }")
     conn
   end
   
@@ -52,8 +55,8 @@ defmodule ExkeychainWeb.AccountController do
   end
   
   def delete(conn, %{ "id" => id }) do
+    id |> String.to_integer() |> :kc_server.delete()
     Logger.info("#{ __MODULE__ }#{  elem(__ENV__.function,0) }")
-    :kc_server.delete(id)
     render(conn, :delete, id: id)
   end
   
