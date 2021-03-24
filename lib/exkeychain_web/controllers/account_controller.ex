@@ -36,14 +36,17 @@ defmodule ExkeychainWeb.AccountController do
   def new(conn, _params) do
     # used to get a new, unsaved, account to edit and then
     # submit to creare
-    Logger.info("TODO: implement #{ __MODULE__ }#{  elem(__ENV__.function,0) }")
-    conn
+    a = :kc_server.new_account()
+    render(conn, :show, account: a)
   end
   
-  def create(conn, _param) do
+  def create(conn, params) do
     # used to submit a newly created account
-    Logger.info("TODO: implement #{ __MODULE__ }#{  elem(__ENV__.function,0) }")
-    conn
+    Logger.info("#{ __MODULE__ }#{  elem(__ENV__.function,0) }")
+    convertedParams = for { key, val} <- params, into: %{}, do: {String.to_atom(key), val}
+    a = {:account, convertedParams}
+    :kc_server.put(a)
+    render(conn, :update, account: a)
   end
   
   def update(conn, params) do
